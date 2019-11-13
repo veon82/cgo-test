@@ -14,5 +14,6 @@ typedef struct APerson  {
 } APerson ;
 
 APerson *get_person(const char * name, const char * long_name);
+int change_person(APerson *fmt, const char *name, const char *long_name);
 
 #endif /* !PERSON_H */

@@ -14,19 +14,29 @@ package main
 import "C"
 import (
 	"fmt"
+	"unsafe"
 )
 
 type (
-	Person C.struct_APerson
+	Person C.APerson
 )
 
 func GetPerson(name string, long_name string) *Person {
 	return (*Person)(C.get_person(C.CString(name), C.CString(long_name)))
 }
 
+func ChangePerson(p *Person, name string, long_name string) {
+	C.change_person((*C.APerson)(unsafe.Pointer(&p)), C.CString(name), C.CString(long_name))
+}
+
 func main(){
 	var f *Person
 	f = GetPerson("tim", "tim hughes")
+	fmt.Printf("Go ptr = %p\n", unsafe.Pointer(f))
 	fmt.Printf("Hello Go world: My name is %s, %s.\n", C.GoString(f.name), C.GoString(f.long_name))
+
+	ChangePerson(f, "andrea", "baldini");
+	fmt.Printf("Now My name is %s, %s.\n", C.GoString(f.name), C.GoString(f.long_name))
+
 }
 
