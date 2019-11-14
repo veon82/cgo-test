@@ -15,5 +15,6 @@ typedef struct APerson  {
 
 APerson *get_person(const char * name, const char * long_name);
 int change_person(APerson *fmt, const char *name, const char *long_name);
+void clean_person(APerson **p);
 
 #endif /* !PERSON_H */
